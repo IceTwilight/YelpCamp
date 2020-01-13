@@ -6,17 +6,17 @@ var data = [
     {
         name: "Cloud's Rest", 
         image:"https://cdn.britannica.com/75/93575-050-8ADFBBE0/fishing-Camping-activities-canoeing-Minnesota-Boundary-Waters.jpg",
-        description: "blahblah 1"
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt debitis commodi quam voluptate modi itaque numquam, accusantium sit explicabo excepturi illo. Quibusdam corporis accusamus fugiat porro voluptate vel, esse magnam? 1"
     },
     {
         name: "Star Nighty night", 
         image:"https://www.discovermoab.com/wp-content/uploads/2017/10/camping-blm.jpg",
-        description: "blahblah 2"
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt debitis commodi quam voluptate modi itaque numquam, accusantium sit explicabo excepturi illo. Quibusdam corporis accusamus fugiat porro voluptate vel, esse magnam? 2"
     },
     {
         name: "New Zealand", 
         image:"https://www.newzealand.com/assets/Tourism-NZ/Nelson/ba40378fe9/img-1536928144-4748-13836-F53C3949-ED9E-E0DC-CF6EC0D789D9308A__FocalPointCropWzI0MCw0ODAsNTAsNTAsNzUsImpwZyIsNjUsMi41XQ.jpg",
-        description: "blahblah 3"
+        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt debitis commodi quam voluptate modi itaque numquam, accusantium sit explicabo excepturi illo. Quibusdam corporis accusamus fugiat porro voluptate vel, esse magnam? 3"
     }
 ];
 
