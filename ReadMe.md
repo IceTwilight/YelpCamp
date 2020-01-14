@@ -82,3 +82,7 @@ Each campground has
 # refactor the routes
 * use express router to reorganize all routes
 
+# Users + comments
+* associate users and comments
+* save author's name to a comment automatically
+
