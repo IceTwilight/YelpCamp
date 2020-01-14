@@ -16,11 +16,11 @@ router.get("/", function(req, res){
     
 });
 
-router.get("/new", function(req, res){ // show the form send the data to the post route
+router.get("/new", isLoggedIn, function(req, res){ // show the form send the data to the post route
     res.render("campgrounds/new");
 });
 
-router.post("/", function(req, res){// new -> campgrounds+POST  
+router.post("/", isLoggedIn, function(req, res){// new -> campgrounds+POST  
     //get data from form and add to campgrounds array
     var name = req.body.name;
     var img = req.body.image;
@@ -50,5 +50,13 @@ router.get("/:id", function(req, res){
     });
     
 });
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
+
 
 module.exports = router;
