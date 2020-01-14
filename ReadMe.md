@@ -53,3 +53,32 @@ Each campground has
 # Style show page
 * Add sidebar to show page
 * Display comments nicely
+
+# Finish styling show page
+* Add public directory
+* Add custom stylesheet
+
+## Auth pt. 1 - Add User Model
+* Install all packages needed for auth
+* Define User model
+
+## Auth pt. 2 - Register
+* Configure Passport
+* Add register routes
+* Add register template
+
+# Auth pt. 3 - Login
+* Add login routes
+* Add login template
+
+# Auth pt. 4 - Logout/Navbar
+* Add logout route
+* Prevent user from adding a comment if not signed in
+* Add links to navbar
+
+# Auth pt. 5 - Show/Hide links
+* Show/hide auth links correctly
+
+# refactor the routes
+* use express router to reorganize all routes
+
