@@ -20,12 +20,17 @@ router.get("/new", isLoggedIn, function(req, res){ // show the form send the dat
     res.render("campgrounds/new");
 });
 
+// create new campground
 router.post("/", isLoggedIn, function(req, res){// new -> campgrounds+POST  
     //get data from form and add to campgrounds array
     var name = req.body.name;
     var img = req.body.image;
     var description = req.body.description;
-    var new_campground = {name:name, image:img, description:description};
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }; 
+    var new_campground = {name:name, image:img, description:description, author: author};
     campground_model.create(new_campground, function(err, newlyCreated){
         if (err) {
             console.log(err);
