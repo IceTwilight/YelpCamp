@@ -26,29 +26,29 @@ function seedDB(){
         if (err) {
             console.log(err);
         }
-        console.log("remove campground");
-         // add some campgrounds
-        data.forEach(function(seed){
-            campground_model.create(seed, function(err, campground){
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("Add a campground");
-                    comment_model.create({
-                        text:"youjindekeiyakulie",
-                        author: "Steve Li"
-                    }, function(err, comment){
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            campground.comments.push(comment);
-                            campground.save();
-                            console.log("created a new comment");
-                        }
-                    });
-                }
-            });
-        });
+        // console.log("remove campground");
+        //  // add some campgrounds
+        // data.forEach(function(seed){
+        //     campground_model.create(seed, function(err, campground){
+        //         if (err) {
+        //             console.log(err);
+        //         } else {
+        //             console.log("Add a campground");
+        //             comment_model.create({
+        //                 text:"youjindekeiyakulie",
+        //                 author: "Steve Li"
+        //             }, function(err, comment){
+        //                 if (err) {
+        //                     console.log(err);
+        //                 } else {
+        //                     campground.comments.push(comment);
+        //                     campground.save();
+        //                     console.log("created a new comment");
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
     });
     
    
