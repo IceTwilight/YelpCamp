@@ -1,43 +1,55 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+var campground_model = require("./models/campground");
+var comment_model = require("./models/comment");
+var user_model = require("./models/user");
+var seedDB = require("./seeds");
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
+var User = require("./models/user");
+var methodOverride = require("method-override");
+var flash = require("connect-flash");
 
+var commentRoutes = require("./routes/comment");
+var campgroundRoutes = require("./routes/campground");
+var indexRoutes = require("./routes/index");
+
+// seedDB();
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useNewUrlParser', true);
+mongoose.connect("mongodb://localhost/yelp_camp_v6");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
+app.use(flash());// don't after passport
 
-var campgrounds = [
-    {name: "Salmon", image: "https://www.reserveamerica.com/webphotos/racms/articles/images/bca19684-d902-422d-8de2-f083e77b50ff_image2_GettyImages-677064730.jpg"},
-    {name: "Titty", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQLOntxCNn67DIqFWkkpjucQG_sVu4VCAQLxtLjd1An37Fapiy&s"},
-    {name: "Bully", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ9ykdpP5hp3IwrjCL7BTVZUeFMrtLmvfPsK0i2TBRNf0_PCOi&s"},
-    {name: "Salmon", image: "https://www.reserveamerica.com/webphotos/racms/articles/images/bca19684-d902-422d-8de2-f083e77b50ff_image2_GettyImages-677064730.jpg"},
-    {name: "Titty", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQLOntxCNn67DIqFWkkpjucQG_sVu4VCAQLxtLjd1An37Fapiy&s"},
-    {name: "Bully", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ9ykdpP5hp3IwrjCL7BTVZUeFMrtLmvfPsK0i2TBRNf0_PCOi&s"},
-    {name: "Salmon", image: "https://www.reserveamerica.com/webphotos/racms/articles/images/bca19684-d902-422d-8de2-f083e77b50ff_image2_GettyImages-677064730.jpg"},
-    {name: "Titty", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQLOntxCNn67DIqFWkkpjucQG_sVu4VCAQLxtLjd1An37Fapiy&s"},
-    {name: "Bully", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ9ykdpP5hp3IwrjCL7BTVZUeFMrtLmvfPsK0i2TBRNf0_PCOi&s"}
-];
 
-app.get("/", function(req, res){
-    res.render("landing");
+//PASSPORT Configuration
+app.use(require("express-session")({
+    secret: "Once again Rusty wins cutest dog",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
 });
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-app.get("/campgrounds", function(req, res){
 
-    res.render("campgrounds", {campgrounds: campgrounds});
-});
 
-app.get("/campgrounds/new", function(req, res){ // show the form send the data to the post route
-    res.render("new");
-});
-
-app.post("/campgrounds", function(req, res){// new -> campgrounds+POST  
-    //get data from form and add to campgrounds array
-    var name = req.body.name;
-    var img = req.body.image;
-    campgrounds.push({name:name, image:img});
-    //redirect back to campgrounds
-    res.redirect("/campgrounds");
-});
+app.use(indexRoutes);
+app.use("/campgrounds",campgroundRoutes);
+app.use("/campgrounds/:id/comments", commentRoutes)
 
 app.listen(3000, function(){
     console.log("Server starts on port 3000");
