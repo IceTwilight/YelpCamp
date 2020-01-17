@@ -29,3 +29,19 @@
             </div>
         </div>
     </nav>
+    
+    <div class="container">
+        <% if (error && error.length > 0) { %>
+        <!-- empty array is truthy -->
+        <div class="alert alert-danger" role="alert">
+            <h1><%= error %></h1>
+        </div>
+        <% } %> 
+        <% if (success && success.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+            <h1><%= success %></h1>
+        </div>
+        <% } %>
+    </div>
+    
+    
