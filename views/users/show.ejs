@@ -1,0 +1,36 @@
+<%- include("../partials/header") %>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <h1><%= user.firstName + ' ' + user.lastName %></h1>
+            <img src="<%= user.avatar %>" alt="user profile image">
+            <div class="caption">
+                <a href="mailto:<%= user.email %>"><%= user.email %></a>
+            </div>
+        </div>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde debitis amet esse mollitia pariatur fugiat animi? Molestias facere quia, reiciendis voluptatum a qui quo fugit, ipsum veniam adipisci vero laborum!
+        Ducimus, ab? Illo repellat accusantium, amet quas voluptatum delectus quam doloremque? Impedit libero rem natus aliquid odio autem, facilis id error, in odit ducimus, quasi deleniti fugit reprehenderit doloremque placeat.
+        Consequuntur nesciunt exercitationem, eum et nisi, commodi assumenda est aliquid, perspiciatis vitae facilis iusto fugiat quibusdam modi enim sapiente reiciendis adipisci necessitatibus. Quasi soluta est sequi tempora delectus consequuntur hic!
+        Rem, esse quibusdam facere cum sed asperiores corporis soluta ut libero, mollitia laboriosam veritatis repudiandae, adipisci natus sapiente corrupti. Tempore eius inventore sed repudiandae porro possimus corporis libero ratione nemo?
+        Rem nam voluptatum odio incidunt maiores ratione recusandae, eius sint veritatis commodi quibusdam a totam dolor nisi quaerat. Sint fugiat ipsa illo voluptatibus maxime quas architecto adipisci quis dolore vel.
+        Mollitia consequuntur aut dolor harum veniam. Et voluptas, eos vitae suscipit aspernatur quae odio quis fugiat, laudantium vel earum libero recusandae officia minus non. Commodi modi voluptas harum fuga natus.
+        Amet, inventore sint officiis aliquam numquam suscipit ipsum nobis excepturi? Non architecto voluptates necessitatibus unde officiis id tempora blanditiis voluptas neque, quo itaque officia! Itaque, saepe odit. Quia, cumque eum!
+        Facere, exercitationem. Consectetur est, rem iure eos consequuntur, adipisci nam cum animi repellat voluptatum nostrum totam. Beatae quae, voluptatibus molestias aperiam libero iste officia odio dignissimos cumque, magnam facilis consectetur?
+        Reiciendis ad ipsam minima harum perspiciatis suscipit cupiditate earum. Eveniet, nisi et molestias officia architecto atque! Maiores vel officia repellendus ratione quidem autem, nihil commodi, totam rem fugit, ipsum numquam!
+        Dignissimos tenetur amet eaque doloremque sed voluptatum esse alias maiores quasi, repellat adipisci consectetur. Ipsam, amet qui? Aperiam blanditiis, dignissimos dolor eligendi inventore at voluptatibus tempore cum. Totam, magni nemo?
+        Quod quae ipsum sint ea tenetur, nihil sit assumenda incidunt animi! Deserunt recusandae, quasi harum at fugit ad aliquam? Sit veritatis cumque illum inventore! Nulla doloremque maxime assumenda reiciendis architecto?
+        Voluptas, est qua
+    </div>
+    <div class="col-md-8">
+        <ul>
+            <% campgrounds.forEach(function(campground){ %>
+                <li>
+                    <a href="/campgrounds/<%= campground.id %>"><%= campground.name %></a>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

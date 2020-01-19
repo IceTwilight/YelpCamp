@@ -1,0 +1,57 @@
+<%- include("../partials/header") %>
+
+<!--  <% if (currentUser && currentUser.isAdmin) { %>
+    <h1>You're Admin!</h1>
+<% } %> -->
+<div class="">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to YelpCamp</h1>
+            <p>View our hand-picked campgrounds from all over the world.</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add a New Campground! </a>
+            </p>
+            <p id='search'>
+                <form action="/campgrounds" method="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="campground search..." class="form-control">
+                        <input type="submit" value="Submit" class="btn btn-default">
+                    </div>
+                </form>
+            </p>
+
+        </div>
+    </header>
+
+    <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+        <div class="col-md-12">
+            <% if (noMatch !== "") { %>
+                <h2><%= noMatch %></h2>
+                <a href="/campgrounds" class="btn btn-success">Go Back</a>
+            <% } %>
+        </div>
+        
+        <% campgrounds.forEach(function(campground){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= campground.image %>" alt="">
+                    <div class="caption">
+                        <h4><%= campground.name %></h4>
+                    </div>
+                    <p>
+                        <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More info</a>
+                    </p>
+                </div>
+                
+                
+            </div>
+            <% }); %> 
+    </div>
+
+</div>
+
+    
+
+
+
+<%- include("../partials/footer") %>
