@@ -18,9 +18,20 @@ var campgroundRoutes = require("./routes/campground");
 var indexRoutes = require("./routes/index");
 
 // seedDB();
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useNewUrlParser', true);
-mongoose.connect("mongodb://localhost/yelp_camp_v12");
+// mongoose.set('useUnifiedTopology', true);
+// mongoose.set('useNewUrlParser', true);
+// process.env.DATABASEURL - set DATABASEURL on heroku 
+var database_url = process.env.database_url || "mongodb://localhost/yelp_camp_v12"
+mongoose.connect(database_url, {
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+}).then(()=>{
+    console.log("Connect to DB");
+}).catch(err =>{
+    console.log("ERROR" + err.message);
+});
+// mongoose.connect("mongodb://localhost/yelp_camp_v12");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -52,6 +63,11 @@ app.use(indexRoutes);
 app.use("/campgrounds",campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes)
 
-app.listen(3000, function(){
-    console.log("Server starts on port 3000");
+
+var port_number = (process.env.PORT || 3000);
+app.listen(port_number, function(){
+    console.log("Server Starts!");
 });
+// app.listen(3000, function(){
+//     console.log("Server starts on port 3000");
+// });

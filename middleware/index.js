@@ -9,7 +9,7 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
             
         campground_model.findById(req.params.id, function(err, foundCampground){
             if (err) {
-                // req.flash("error", "You need to be logged in to do that!");
+                req.flash("error", "You need to be logged in to do that!");
                 res.redirect("back");
             } else {
                 // does user own the campground

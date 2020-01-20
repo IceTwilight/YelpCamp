@@ -75,34 +75,35 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
     //get data from form and add to campgrounds array
     var name = req.body.name;
     var price = req.body.price;
-    // var img = req.body.image;
+    var img = req.body.image;
     var description = req.body.description;
     var author = {
         id: req.user._id,
         username: req.user.username
     }; 
-    var new_campground = {name:name, price:price, description:description, author: author};
-    cloudinary.uploader.upload(req.file.path, function(result) {
-        // add cloudinary url for the image to the campground object under image property
-        var image = result.secure_url;
-        new_campground.image = image;
+    var new_campground = {name:name, price:price, image:img, description:description, author: author};
+    // cloudinary.uploader.upload(req.file.path, function(result) {
+    //     // add cloudinary url for the image to the campground object under image property
+    //     var image = result.secure_url;
+    //     new_campground.image = image;
         
-        campground_model.create(new_campground, function(err, campground) {
-          if (err) {
+    //     campground_model.create(new_campground, function(err, campground) {
+    //       if (err) {
+    //         req.flash('error', err.message);
+    //         return res.redirect('back');
+    //       }
+    //       res.redirect('/campgrounds/' + campground.id);
+    //     });
+    // });
+    campground_model.create(new_campground, function(err, newlyCreated){
+        if (err) {
             req.flash('error', err.message);
-            return res.redirect('back');
-          }
-          res.redirect('/campgrounds/' + campground.id);
-        });
-    });
-    // campground_model.create(new_campground, function(err, newlyCreated){
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         //redirect back to campgrounds
-    //         res.redirect("/campgrounds");
-    //     }
-    // })
+            console.log(err);
+        } else {
+            //redirect back to campgrounds
+            res.redirect("/campgrounds");
+        }
+    })
     // campgrounds.push({name:name, image:img});
     
 });
